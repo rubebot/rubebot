@@ -1,0 +1,9 @@
+{
+  "systemPort": 8322,
+  "robotName": "rubebot",
+  "endChar": ">",
+  "commandShort": {
+    "s": "say",
+    "o": "order"
+  }
+}
