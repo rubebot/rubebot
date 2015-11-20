@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+/**
+ * @module Rubebot
+ * @author Rube
+ * @date 15/11/20
+ * @desc bin init
+ */
+
+'use strict';
+
+require('../index');
