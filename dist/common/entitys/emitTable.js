@@ -20,7 +20,7 @@ var EmitTable = (function () {
         _classCallCheck(this, EmitTable);
 
         this.commandEmitTable = {};
-        this.wordEmitTable = [];
+        this.wordsEmitTable = [];
     }
 
     _createClass(EmitTable, [{
@@ -31,7 +31,7 @@ var EmitTable = (function () {
     }, {
         key: "setWords",
         value: function setWords(funcStr, words) {
-            this.wordEmitTable.push({
+            this.wordsEmitTable.push({
                 words: words,
                 funcStr: funcStr
             });

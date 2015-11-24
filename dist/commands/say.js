@@ -33,7 +33,14 @@ var Say = (function (_CommandExec) {
     _createClass(Say, [{
         key: 'exec',
         value: function exec(command) {
-            console.log(command);
+
+            var scripts = this.getScriptModules();
+            var emitList = [];
+            scripts.forEach(function (script, index) {
+
+                var wordsEmitTable = script.emitTable.wordsEmitTable;
+                var description = script.description;
+            });
         }
     }]);
 
