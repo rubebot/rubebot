@@ -7,6 +7,7 @@
 
 import fs from 'fs';
 import Script from '../common/script';
+import ScriptInfo from '../common/entitys/scriptInfo';
 import * as bucketApi from '../common/bucketApi';
 
 module.exports = (next) => {
@@ -15,13 +16,11 @@ module.exports = (next) => {
     let scriptModules = scripts.map((path, index)=> {
 
         let script = require(`../scripts/${path}`)({Script});
-        return {
-            id: index,
-            name: path,
-            description: script.get_description(),
-            emitTable: script.get_emitTable(),
-            script
-        };
+
+        let scriptInfo = new ScriptInfo(index, path, script);
+        scriptInfo.setDescription(script.get_description());
+        scriptInfo.setEmitTable(script.get_emitTable());
+        return scriptInfo
     });
 
     bucketApi.setScriptModules(scriptModules);

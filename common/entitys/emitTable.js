@@ -9,7 +9,7 @@ class EmitTable {
 
     constructor() {
         this.commandEmitTable = {};
-        this.wordEmitTable = [];
+        this.wordsEmitTable = [];
     }
 
     setOrder(funcStr, command) {
@@ -17,7 +17,7 @@ class EmitTable {
     }
 
     setWords(funcStr, words) {
-        this.wordEmitTable.push({
+        this.wordsEmitTable.push({
             words,
             funcStr
         });

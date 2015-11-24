@@ -19,6 +19,10 @@ var _commonScript = require('../common/script');
 
 var _commonScript2 = _interopRequireDefault(_commonScript);
 
+var _commonEntitysScriptInfo = require('../common/entitys/scriptInfo');
+
+var _commonEntitysScriptInfo2 = _interopRequireDefault(_commonEntitysScriptInfo);
+
 var _commonBucketApi = require('../common/bucketApi');
 
 var bucketApi = _interopRequireWildcard(_commonBucketApi);
@@ -29,13 +33,11 @@ module.exports = function (next) {
     var scriptModules = scripts.map(function (path, index) {
 
         var script = require('../scripts/' + path)({ Script: _commonScript2['default'] });
-        return {
-            id: index,
-            name: path,
-            description: script.get_description(),
-            emitTable: script.get_emitTable(),
-            script: script
-        };
+
+        var scriptInfo = new _commonEntitysScriptInfo2['default'](index, path, script);
+        scriptInfo.setDescription(script.get_description());
+        scriptInfo.setEmitTable(script.get_emitTable());
+        return scriptInfo;
     });
 
     bucketApi.setScriptModules(scriptModules);

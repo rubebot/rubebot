@@ -5,6 +5,8 @@
  * @desc command father class
  */
 
+import * as bucketApi from '../bucketApi';
+
 class CommandExec {
 
     constructor(async) {
@@ -12,8 +14,13 @@ class CommandExec {
         this.async = async ? true : false;
     }
 
-    exec(){
+    exec(command) {
 
+    }
+
+    getScriptModules(name) {
+
+        return bucketApi.getScriptModules(name);
     }
 }
 
