@@ -87,10 +87,18 @@ var Script = (function () {
         value: function get_ask() {
             return 'no ask';
         }
+    }, {
+        key: 'get_help',
+        value: function get_help() {
+            return 'no help';
+        }
     }]);
 
     return Script;
 })();
+
+Script.ProcessConfig = _commonEntitysProcessConfig2['default'];
+Script.EmitTable = _commonEntitysEmitTable2['default'];
 
 exports['default'] = Script;
 module.exports = exports['default'];

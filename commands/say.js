@@ -14,8 +14,15 @@ class Say extends CommandExec {
         super();
     }
 
-    exec(command){
-        console.log(command)
+    exec(command) {
+
+        let scripts = this.getScriptModules();
+        let emitList = [];
+        scripts.forEach((script, index)=> {
+
+            let wordsEmitTable = script.emitTable.wordsEmitTable;
+            let description = script.description;
+        })
     }
 }
 

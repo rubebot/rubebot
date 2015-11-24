@@ -64,7 +64,14 @@ class Script {
     static get_ask() {
         return 'no ask';
     }
+
+    static get_help() {
+        return 'no help';
+    }
 }
+
+Script.ProcessConfig = ProcessConfig;
+Script.EmitTable = EmitTable;
 
 export default Script;
 

@@ -15,8 +15,28 @@ module.exports = (context) => {
             super(cxt);
         }
 
-        info_desc() {
-            super.info_desc('hello rubebot world!~~');
+        static get_emitTable() {
+
+            let emitTable = new Script.EmitTable();
+            emitTable.setOrder('sayHello', 'sayHello');
+            emitTable.setOrder('test', 'sayMaMa');
+            return emitTable;
+        }
+
+        sayHello(what) {
+            console.log(what);
+        }
+
+        sayMaMa() {
+            console.log('mama');
+        }
+
+        static get_description() {
+            return 'say hello';
+        }
+
+        static get_ask() {
+            return '是否要说hello';
         }
     }
 

@@ -28,9 +28,33 @@ module.exports = function (context) {
         }
 
         _createClass(SayHello, [{
-            key: 'info_desc',
-            value: function info_desc() {
-                _get(Object.getPrototypeOf(SayHello.prototype), 'info_desc', this).call(this, 'hello rubebot world!~~');
+            key: 'sayHello',
+            value: function sayHello(what) {
+                console.log(what);
+            }
+        }, {
+            key: 'sayMaMa',
+            value: function sayMaMa() {
+                console.log('mama');
+            }
+        }], [{
+            key: 'get_emitTable',
+            value: function get_emitTable() {
+
+                var emitTable = new Script.EmitTable();
+                emitTable.setOrder('sayHello', 'sayHello');
+                emitTable.setOrder('test', 'sayMaMa');
+                return emitTable;
+            }
+        }, {
+            key: 'get_description',
+            value: function get_description() {
+                return 'say hello';
+            }
+        }, {
+            key: 'get_ask',
+            value: function get_ask() {
+                return '是否要说hello';
             }
         }]);
 

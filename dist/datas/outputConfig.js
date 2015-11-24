@@ -23,5 +23,8 @@ module.exports = {
   },
   scriptSameWarn: function scriptSameWarn(scriptName) {
     return console.log(clc.bold.yellow('Have the same name script \'' + scriptName + '\''));
+  },
+  scriptNotFound: function scriptNotFound(scriptName) {
+    return console.log(clc.bold.red('script \'' + scriptName + '\' not found !'));
   }
 };
