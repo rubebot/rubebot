@@ -7,7 +7,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var changed = require('gulp-changed');
 
-var filter = ['servers', 'commands', 'common', 'datas', 'middlewares', 'scripts'];
+var filter = ['servers', 'commands', 'common', 'datas', 'middlewares', 'scripts', 'tools'];
 var jsFilter = filter.map(function (item) {
     return item + '/**/*.js';
 });
