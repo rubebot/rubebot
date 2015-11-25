@@ -48,6 +48,7 @@ class Script {
         let config = new ProcessConfig();
         config.setServiceType(ProcessConfig.START_SERVICE_EVERY);
         config.setReceiveType(ProcessConfig.RECEIVE_ONCE);
+        config.setRunType(ProcessConfig.RUN_FAST);
         return config;
     }
 
