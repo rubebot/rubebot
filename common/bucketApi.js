@@ -79,6 +79,7 @@ module.exports = {
             value: processInfo
         });
         processID++;
+        return processID - 1;
     },
     /**
      * get process list
