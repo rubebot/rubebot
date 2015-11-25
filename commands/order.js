@@ -5,9 +5,9 @@
  * @desc send the fixed format command
  */
 
-import CommandExec from '../common/entitys/commandExec';
 import * as output from '../datas/outputConfig';
 import * as bucketApi from '../common/bucketApi';
+import CommandExec from '../common/entitys/commandExec';
 import Command from '../common/entitys/command';
 import ProcessConfig from '../common/entitys/processConfig';
 import ProcessInfo from '../common/entitys/processInfo';
@@ -72,7 +72,7 @@ class Order extends CommandExec {
 
                         p.send({
                             exChildProcess,
-                            processInfo                  //TODO多种运行方式,输出管理(通知和直接输出)
+                            processInfo
                         });
                     } else if (processConfig.runType == ProcessConfig.RUN_FAST) {
 
@@ -87,7 +87,7 @@ class Order extends CommandExec {
                     }
 
                 } else {
-                    //TODO not found
+                    output.funcStrNotFound(funcCommand.main);
                 }
             }
         } else {
