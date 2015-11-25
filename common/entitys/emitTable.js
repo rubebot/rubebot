@@ -12,11 +12,11 @@ class EmitTable {
         this.wordsEmitTable = [];
     }
 
-    setOrder(funcStr, command) {
+    setOrder(command, funcStr) {
         this.commandEmitTable[command] = funcStr;
     }
 
-    setWords(funcStr, words) {
+    setWords(words, funcStr) {
         this.wordsEmitTable.push({
             words,
             funcStr
