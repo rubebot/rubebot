@@ -21,5 +21,6 @@ module.exports = (next)=> {
     );
     `;
     bucket.runMemory(sql);
+
     next();
 };

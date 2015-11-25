@@ -29,7 +29,9 @@ function zhcnSplit(command) {
 
 module.exports = (chunk, next) => {
 
-    let command = splitChunk(chunk);
-    zhcnSplit(command);
-    next(command);
+    if (chunk.length) {
+        let command = splitChunk(chunk);
+        zhcnSplit(command);
+        next(command);
+    }
 };
