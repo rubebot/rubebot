@@ -44,6 +44,10 @@ module.exports = function (context) {
                 var emitTable = new Script.EmitTable();
                 emitTable.setOrder('sayHello', 'sayHello');
                 emitTable.setOrder('test', 'sayMaMa');
+
+                emitTable.setWords('不想吃饭', 'sayMaMa');
+                emitTable.setWords('睡觉', 'sayMaMa');
+
                 return emitTable;
             }
         }, {
