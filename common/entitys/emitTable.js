@@ -5,6 +5,17 @@
  * @desc EmitTable Entity
  */
 
+import Words from './words';
+import zcSplit from 'nodejieba';
+
+function zhcnSplit(words) {
+    let content = {
+        tag: zcSplit.tag(words),
+        extract: zcSplit.extract(words, 4)
+    };
+    return content;
+}
+
 class EmitTable {
 
     constructor() {
@@ -16,10 +27,12 @@ class EmitTable {
         this.commandEmitTable[command] = funcStr;
     }
 
-    setWords(words, funcStr) {
+    setWords(words, order) {
+
+        words = zhcnSplit(words);
         this.wordsEmitTable.push({
             words,
-            funcStr
+            order
         });
     }
 }
