@@ -68,6 +68,7 @@ var Script = (function () {
             var config = new _commonEntitysProcessConfig2['default']();
             config.setServiceType(_commonEntitysProcessConfig2['default'].START_SERVICE_EVERY);
             config.setReceiveType(_commonEntitysProcessConfig2['default'].RECEIVE_ONCE);
+            config.setRunType(_commonEntitysProcessConfig2['default'].RUN_FAST);
             return config;
         }
     }, {

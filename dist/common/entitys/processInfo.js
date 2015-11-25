@@ -1,8 +1,8 @@
 /**
- * @module EmitTable
+ * @module ProcessInfo
  * @author Rube
- * @date 15/11/23
- * @desc EmitTable Entity
+ * @date 15/11/25
+ * @desc memoryDb 里面存储的 process info
  */
 
 "use strict";
@@ -15,31 +15,22 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var EmitTable = (function () {
-    function EmitTable() {
-        _classCallCheck(this, EmitTable);
+var ProcessInfo = (function () {
+    function ProcessInfo() {
+        _classCallCheck(this, ProcessInfo);
 
-        this.commandEmitTable = {};
-        this.wordsEmitTable = [];
+        this.pid = null;
     }
 
-    _createClass(EmitTable, [{
-        key: "setOrder",
-        value: function setOrder(command, funcStr) {
-            this.commandEmitTable[command] = funcStr;
-        }
-    }, {
-        key: "setWords",
-        value: function setWords(words, funcStr) {
-            this.wordsEmitTable.push({
-                words: words,
-                funcStr: funcStr
-            });
+    _createClass(ProcessInfo, [{
+        key: "setPid",
+        value: function setPid(pid) {
+            this.pid = pid;
         }
     }]);
 
-    return EmitTable;
+    return ProcessInfo;
 })();
 
-exports["default"] = EmitTable;
+exports["default"] = ProcessInfo;
 module.exports = exports["default"];

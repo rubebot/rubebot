@@ -1,8 +1,8 @@
 /**
- * @module EmitTable
+ * @module ExChildProcess
  * @author Rube
- * @date 15/11/23
- * @desc EmitTable Entity
+ * @date 15/11/25
+ * @desc 与 fork 的进程进行交互
  */
 
 "use strict";
@@ -15,31 +15,43 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var EmitTable = (function () {
-    function EmitTable() {
-        _classCallCheck(this, EmitTable);
+var ExChildProcess = (function () {
+    function ExChildProcess() {
+        _classCallCheck(this, ExChildProcess);
 
-        this.commandEmitTable = {};
-        this.wordsEmitTable = [];
+        this.funcStr = null;
+        this.scriptName = null;
+        this.option = null;
+        this.pid = null;
     }
 
-    _createClass(EmitTable, [{
-        key: "setOrder",
-        value: function setOrder(command, funcStr) {
-            this.commandEmitTable[command] = funcStr;
+    _createClass(ExChildProcess, [{
+        key: "setPid",
+        value: function setPid(pid) {
+            this.pid = pid;
         }
     }, {
-        key: "setWords",
-        value: function setWords(words, funcStr) {
-            this.wordsEmitTable.push({
-                words: words,
-                funcStr: funcStr
-            });
+        key: "setFuncStr",
+        value: function setFuncStr(funcStr) {
+
+            this.funcStr = funcStr;
+        }
+    }, {
+        key: "setScriptName",
+        value: function setScriptName(scriptName) {
+
+            this.scriptName = scriptName;
+        }
+    }, {
+        key: "setOption",
+        value: function setOption(option) {
+
+            this.option = option;
         }
     }]);
 
-    return EmitTable;
+    return ExChildProcess;
 })();
 
-exports["default"] = EmitTable;
+exports["default"] = ExChildProcess;
 module.exports = exports["default"];

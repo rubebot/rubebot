@@ -35,6 +35,12 @@ var ProcessConfig = (function () {
 
             this.receiveType = receiveType;
         }
+    }, {
+        key: "setRunType",
+        value: function setRunType(runType) {
+
+            this.runType = runType;
+        }
     }]);
 
     return ProcessConfig;
@@ -44,6 +50,8 @@ ProcessConfig.START_SERVICE_ONCE = 1;
 ProcessConfig.START_SERVICE_EVERY = 2;
 ProcessConfig.RECEIVE_ONCE = 3;
 ProcessConfig.RECEIVE_EVERY = 4;
+ProcessConfig.RUN_FAST = 5;
+ProcessConfig.RUN_DAEMON = 6;
 
 exports["default"] = ProcessConfig;
 module.exports = exports["default"];

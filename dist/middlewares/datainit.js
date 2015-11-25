@@ -19,5 +19,6 @@ module.exports = function (next) {
 
   var sql = '\n    CREATE TABLE "kv" (\n\t "key" text NOT NULL,\n\t "value" text NOT NULL,\n\t "time" text NOT NULL,\n\t "special" text,\n\tPRIMARY KEY("key")\n    );\n    ';
   bucket.runMemory(sql);
+
   next();
 };

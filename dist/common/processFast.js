@@ -1,8 +1,8 @@
 /**
- * @module Process
+ * @module ProcessFast
  * @author Rube
- * @date 15/11/24
- * @desc 脚本执行部
+ * @date 15/11/25
+ * @desc 快速执行模式的执行部
  */
 
 'use strict';
@@ -13,7 +13,7 @@ var _commonScript = require('../common/script');
 
 var _commonScript2 = _interopRequireDefault(_commonScript);
 
-function run(message) {
+module.exports = function (message) {
     var exChildProcess = message.exChildProcess;
     var processInfo = message.processInfo;
     var funcStr = exChildProcess.funcStr;
@@ -26,9 +26,8 @@ function run(message) {
     var script = new ScriptClass({
         pid: pid
     });
-    script[funcStr](option);
-}
 
-process.on('message', function (m) {
-    run(m);
-});
+    script.on_process_create();
+    script.on_process_start();
+    script.on_process_exec(funcStr, option);
+};

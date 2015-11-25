@@ -27,6 +27,39 @@ var _datasOutputConfig = require('../datas/outputConfig');
 
 var output = _interopRequireWildcard(_datasOutputConfig);
 
+var _commonBucketApi = require('../common/bucketApi');
+
+var bucketApi = _interopRequireWildcard(_commonBucketApi);
+
+var _commonEntitysCommand = require('../common/entitys/command');
+
+var _commonEntitysCommand2 = _interopRequireDefault(_commonEntitysCommand);
+
+var _commonEntitysProcessConfig = require('../common/entitys/processConfig');
+
+var _commonEntitysProcessConfig2 = _interopRequireDefault(_commonEntitysProcessConfig);
+
+var _commonEntitysProcessInfo = require('../common/entitys/processInfo');
+
+var _commonEntitysProcessInfo2 = _interopRequireDefault(_commonEntitysProcessInfo);
+
+var _commonEntitysExchildProcess = require('../common/entitys/exchildProcess');
+
+var _commonEntitysExchildProcess2 = _interopRequireDefault(_commonEntitysExchildProcess);
+
+var _child_process = require('child_process');
+
+var _child_process2 = _interopRequireDefault(_child_process);
+
+function splitChunk(chunk) {
+
+    var cxt = chunk.split(' ').filter(function (item) {
+        return item != '';
+    });
+
+    return new _commonEntitysCommand2['default'](cxt);
+}
+
 var Order = (function (_CommandExec) {
     _inherits(Order, _CommandExec);
 
@@ -57,10 +90,49 @@ var Order = (function (_CommandExec) {
             if (execScriptName && execScript.length > 0) {
                 if (execScript.length > 1) {
                     output.scriptSameWarn(execScriptName);
-                } else {}
+                } else {
+
+                    var funcCommand = splitChunk(command.nativeContent);
+                    var funcStr = execScript[0].emitTable.commandEmitTable[funcCommand.main];
+                    var processConfig = execScript[0].script.get_processConfig();
+
+                    if (funcStr) {
+
+                        var exChildProcess = new _commonEntitysExchildProcess2['default']();
+                        var processInfo = new _commonEntitysProcessInfo2['default']();
+                        exChildProcess.setFuncStr(funcStr);
+                        exChildProcess.setScriptName(execScriptName);
+                        exChildProcess.setOption(funcCommand.options);
+
+                        if (processConfig.runType == _commonEntitysProcessConfig2['default'].RUN_DAEMON) {
+
+                            var p = _child_process2['default'].fork(__dirname + '/../common/processDaemon.js');
+                            processInfo.setPid(p.pid);
+                            var selfpid = bucketApi.addProcess(processInfo);
+                            exChildProcess.setPid(selfpid);
+
+                            p.send({
+                                exChildProcess: exChildProcess,
+                                processInfo: processInfo //TODO多种运行方式,输出管理(通知和直接输出)
+                            });
+                        } else if (processConfig.runType == _commonEntitysProcessConfig2['default'].RUN_FAST) {
+
+                                var selfpid = bucketApi.addProcess(processInfo);
+                                exChildProcess.setPid(selfpid);
+
+                                var processFast = require('../common/processFast');
+                                processFast({
+                                    exChildProcess: exChildProcess,
+                                    processInfo: processInfo
+                                });
+                            }
+                    } else {
+                        //TODO not found
+                    }
+                }
             } else {
-                output.scriptNotFound(execScriptName);
-            }
+                    output.scriptNotFound(execScriptName);
+                }
         }
     }]);
 

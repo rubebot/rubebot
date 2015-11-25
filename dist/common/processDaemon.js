@@ -1,8 +1,8 @@
 /**
- * @module Process
+ * @module ProcessDaemon
  * @author Rube
  * @date 15/11/24
- * @desc 脚本执行部
+ * @desc 以守护进程方式执行的脚本执行部
  */
 
 'use strict';
@@ -26,7 +26,9 @@ function run(message) {
     var script = new ScriptClass({
         pid: pid
     });
-    script[funcStr](option);
+    script.on_process_create();
+    script.on_process_start();
+    script.on_process_exec(funcStr, option);
 }
 
 process.on('message', function (m) {
