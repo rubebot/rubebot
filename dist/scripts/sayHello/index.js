@@ -28,37 +28,73 @@ module.exports = function (context) {
         }
 
         _createClass(SayHello, [{
+            key: 'time',
+            value: function time(what) {
+                var help = new Script.Help();
+                help.set('-time [秒]', '定时间');
+
+                var flag = true;
+                for (var w in what) {
+                    flag = false;
+                }
+
+                if (flag) {
+                    console.log(help.toString());
+                } else {
+                    setTimeout(function () {
+                        console.log('时间到');
+                    }, parseInt(what.time) * 1000);
+                }
+            }
+        }, {
             key: 'sayHello',
             value: function sayHello(what) {
-                console.log(what);
+                var help = new Script.Help();
+                help.set('-name [名字]', '你叫什么');
+                help.set('--myname', '我叫什么');
+
+                var flag = true;
+                for (var w in what) {
+                    flag = false;
+                }
+
+                if (flag) {
+                    console.log(help.toString());
+                } else if (what.name) {
+                    console.log('Your name is ' + what.name);
+                } else {
+                    console.log('My name is Rube');
+                }
             }
         }, {
             key: 'sayMaMa',
             value: function sayMaMa() {
-                console.log('mama');
+                console.log('测试成功~!');
             }
         }], [{
+            key: 'get_description',
+            value: function get_description() {
+                return {
+                    sayHello: 'jiao hello',
+                    test: '测试',
+                    setTimeout: '定时'
+                };
+            }
+        }, {
             key: 'get_emitTable',
             value: function get_emitTable() {
 
                 var emitTable = new Script.EmitTable();
                 emitTable.setOrder('sayHello', 'sayHello');
                 emitTable.setOrder('test', 'sayMaMa');
+                emitTable.setOrder('setTimeout', 'time');
 
-                emitTable.setWords('不想吃饭', 'sayMaMa');
-                emitTable.setWords('睡觉', 'sayMaMa');
+                emitTable.setWords('你好', 'sayHello');
+                emitTable.setWords('吃饭睡觉打豆豆', 'test');
+                emitTable.setWords('测试测试', 'test');
+                emitTable.setWords('定时', 'setTimeout');
 
                 return emitTable;
-            }
-        }, {
-            key: 'get_description',
-            value: function get_description() {
-                return 'say hello';
-            }
-        }, {
-            key: 'get_ask',
-            value: function get_ask() {
-                return '是否要说hello';
             }
         }]);
 

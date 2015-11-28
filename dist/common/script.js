@@ -25,13 +25,13 @@ var _commonEntitysEmitTable = require('../common/entitys/emitTable');
 
 var _commonEntitysEmitTable2 = _interopRequireDefault(_commonEntitysEmitTable);
 
-var _commonEntitysWords = require('../common/entitys/words');
-
-var _commonEntitysWords2 = _interopRequireDefault(_commonEntitysWords);
-
 var _commonEntitysProcessConfig = require('../common/entitys/processConfig');
 
 var _commonEntitysProcessConfig2 = _interopRequireDefault(_commonEntitysProcessConfig);
+
+var _toolsHelp = require('../tools/help');
+
+var _toolsHelp2 = _interopRequireDefault(_toolsHelp);
 
 var Script = (function () {
     function Script(cxt) {
@@ -104,7 +104,7 @@ var Script = (function () {
 
 Script.ProcessConfig = _commonEntitysProcessConfig2['default'];
 Script.EmitTable = _commonEntitysEmitTable2['default'];
-Script.Words = _commonEntitysWords2['default'];
+Script.Help = _toolsHelp2['default'];
 
 exports['default'] = Script;
 module.exports = exports['default'];

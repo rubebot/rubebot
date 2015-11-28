@@ -27,7 +27,13 @@ var _toolsSimilarity = require('../tools/similarity');
 
 var similarity = _interopRequireWildcard(_toolsSimilarity);
 
-var tagP = 1;
+var _datasOutputConfig = require('../datas/outputConfig');
+
+var output = _interopRequireWildcard(_datasOutputConfig);
+
+var clc = require('cli-color');
+
+var tagP = 0.5;
 var extractP = 0.5;
 
 var Say = (function (_CommandExec) {
@@ -70,9 +76,19 @@ var Say = (function (_CommandExec) {
                 });
             });
 
-            emitList.forEach(function (emit) {
-                console.log(emit);
+            var tip = '\n';
+            emitList.forEach(function (emit, i) {
+                var index = emit.index;
+                var ep = emit.ep;
+                var tp = emit.tp;
+                var order = emit.order;
+                var scriptName = emit.scriptName;
+
+                var script = scripts[index];
+                tip += clc.yellow(script.description[order]) + ':\no -e ' + scriptName + ' ' + order + '\n';
+                i != emitList.length - 1 && (tip += '\n');
             });
+            output.sayOutput(tip);
         }
     }]);
 

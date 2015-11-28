@@ -29,5 +29,8 @@ module.exports = {
     },
     funcStrNotFound: function funcStrNotFound(funcStr) {
         return console.log(clc.bold.red('can\'t run \'' + funcStr + '\' !'));
+    },
+    sayOutput: function sayOutput(tip) {
+        return console.log(clc.bold.cyan(tip));
     }
 };
