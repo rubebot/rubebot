@@ -27,12 +27,16 @@ var _commonBucketApi = require('../common/bucketApi');
 
 var bucketApi = _interopRequireWildcard(_commonBucketApi);
 
+var _commonApi = require('../common/api');
+
+var _commonApi2 = _interopRequireDefault(_commonApi);
+
 module.exports = function (next) {
 
     var scripts = _fs2['default'].readdirSync(__dirname + '/../scripts');
     var scriptModules = scripts.map(function (path, index) {
 
-        var script = require('../scripts/' + path)({ Script: _commonScript2['default'] });
+        var script = require('../scripts/' + path)({ Script: _commonScript2['default'], Api: _commonApi2['default'] });
 
         var scriptInfo = new _commonEntitysScriptInfo2['default'](index, path, script);
         scriptInfo.setDescription(script.get_description());

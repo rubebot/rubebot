@@ -13,6 +13,10 @@ var _commonScript = require('../common/script');
 
 var _commonScript2 = _interopRequireDefault(_commonScript);
 
+var _commonAapi = require('../common/Aapi');
+
+var _commonAapi2 = _interopRequireDefault(_commonAapi);
+
 function run(message) {
     var exChildProcess = message.exChildProcess;
     var processInfo = message.processInfo;
@@ -21,7 +25,7 @@ function run(message) {
     var scriptName = exChildProcess.scriptName;
     var pid = exChildProcess.pid;
 
-    var ScriptClass = require(__dirname + '/../scripts/' + scriptName)({ Script: _commonScript2['default'] });
+    var ScriptClass = require(__dirname + '/../scripts/' + scriptName)({ Script: _commonScript2['default'], Api: _commonAapi2['default'] });
 
     var script = new ScriptClass({
         pid: pid

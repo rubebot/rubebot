@@ -17,6 +17,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 module.exports = function (context) {
     var Script = context.Script;
+    var Api = context.Api;
 
     var SayHello = (function (_Script) {
         _inherits(SayHello, _Script);
@@ -33,12 +34,7 @@ module.exports = function (context) {
                 var help = new Script.Help();
                 help.set('-time [秒]', '定时间');
 
-                var flag = true;
-                for (var w in what) {
-                    flag = false;
-                }
-
-                if (flag) {
+                if (Api.tool.objectIsNull(what)) {
                     console.log(help.toString());
                 } else {
                     setTimeout(function () {
@@ -53,12 +49,7 @@ module.exports = function (context) {
                 help.set('-name [名字]', '你叫什么');
                 help.set('--myname', '我叫什么');
 
-                var flag = true;
-                for (var w in what) {
-                    flag = false;
-                }
-
-                if (flag) {
+                if (Api.tool.objectIsNull(what)) {
                     console.log(help.toString());
                 } else if (what.name) {
                     console.log('Your name is ' + what.name);

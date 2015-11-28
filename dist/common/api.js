@@ -29,6 +29,10 @@ var _bucketApi = require('./bucketApi');
 
 var bucketApi = _interopRequireWildcard(_bucketApi);
 
+var _toolsLangTools = require('../tools/langTools');
+
+var langTool = _interopRequireWildcard(_toolsLangTools);
+
 var config = require('../datas/config');
 
 var client = _net2['default'].connect({ port: config.systemPort }, function () {});
@@ -36,6 +40,8 @@ var client = _net2['default'].connect({ port: config.systemPort }, function () {
 var Api = function Api() {
   _classCallCheck(this, Api);
 };
+
+Api.tool = langTool;
 
 exports['default'] = Api;
 module.exports = exports['default'];
