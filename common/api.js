@@ -8,6 +8,7 @@
 import net from 'net';
 import ExProcess from './entitys/exprocess';
 import * as bucketApi from './bucketApi';
+import * as langTool from '../tools/langTools';
 
 const config = require('../datas/config');
 
@@ -15,7 +16,8 @@ let client = net.connect({port: config.systemPort}, ()=> {
 });
 
 class Api {
-
 }
+
+Api.tool = langTool;
 
 export default Api;

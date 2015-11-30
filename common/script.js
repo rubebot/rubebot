@@ -8,6 +8,7 @@
 import Api from './api';
 import EmitTable from '../common/entitys/emitTable';
 import ProcessConfig from '../common/entitys/processConfig';
+import Help from '../tools/help';
 
 class Script {
 
@@ -73,6 +74,7 @@ class Script {
 
 Script.ProcessConfig = ProcessConfig;
 Script.EmitTable = EmitTable;
+Script.Help = Help;
 
 export default Script;
 
