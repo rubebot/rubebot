@@ -5,7 +5,7 @@
  * @desc provide the cli server to rubebot system
  */
 
-const Connect = require('../common/connect');
+const Connect = require('../tools/connect');
 const config = require('../datas/config');
 const output = require('../datas/outputConfig');
 import * as bucketApi from '../common/bucketApi';
