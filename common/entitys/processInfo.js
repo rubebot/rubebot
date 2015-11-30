@@ -9,10 +9,20 @@ class ProcessInfo {
 
     constructor() {
         this.pid = null;
+        this.processConfig = null;
+        this.receiveTime = 0;
     }
 
     setPid(pid) {
         this.pid = pid;
+    }
+
+    setProcessConfig(processConfig) {
+        this.processConfig = processConfig;
+    }
+
+    incReceiveTime() {
+        this.receiveTime++;
     }
 }
 

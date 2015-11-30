@@ -5,7 +5,6 @@
  * @desc EmitTable Entity
  */
 
-import Words from './words';
 import zcSplit from 'nodejieba';
 
 function zhcnSplit(words) {
