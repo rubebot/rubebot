@@ -6,11 +6,12 @@
  */
 
 import Script from '../common/script';
+import Api from '../common/api';
 
-module.exports = (message)=>{
+const processFast = (message)=> {
     let {exChildProcess, processInfo} = message;
     let {funcStr, option, scriptName, pid} = exChildProcess;
-    let ScriptClass = require(`${__dirname}/../scripts/${scriptName}`)({Script});
+    let ScriptClass = require(`${__dirname}/../scripts/${scriptName}`)({Script, Api});
 
     let script = new ScriptClass({
         pid
@@ -19,4 +20,7 @@ module.exports = (message)=>{
     script.on_process_create();
     script.on_process_start();
     script.on_process_exec(funcStr, option);
+    return script;
 };
+
+export default processFast;
