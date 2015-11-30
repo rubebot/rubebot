@@ -20,12 +20,24 @@ var ProcessInfo = (function () {
         _classCallCheck(this, ProcessInfo);
 
         this.pid = null;
+        this.processConfig = null;
+        this.receiveTime = 0;
     }
 
     _createClass(ProcessInfo, [{
         key: "setPid",
         value: function setPid(pid) {
             this.pid = pid;
+        }
+    }, {
+        key: "setProcessConfig",
+        value: function setProcessConfig(processConfig) {
+            this.processConfig = processConfig;
+        }
+    }, {
+        key: "incReceiveTime",
+        value: function incReceiveTime() {
+            this.receiveTime++;
         }
     }]);
 

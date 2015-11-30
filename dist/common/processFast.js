@@ -7,6 +7,10 @@
 
 'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _commonScript = require('../common/script');
@@ -17,7 +21,7 @@ var _commonApi = require('../common/api');
 
 var _commonApi2 = _interopRequireDefault(_commonApi);
 
-module.exports = function (message) {
+var processFast = function processFast(message) {
     var exChildProcess = message.exChildProcess;
     var processInfo = message.processInfo;
     var funcStr = exChildProcess.funcStr;
@@ -34,4 +38,8 @@ module.exports = function (message) {
     script.on_process_create();
     script.on_process_start();
     script.on_process_exec(funcStr, option);
+    return script;
 };
+
+exports['default'] = processFast;
+module.exports = exports['default'];

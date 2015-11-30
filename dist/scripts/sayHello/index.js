@@ -87,6 +87,12 @@ module.exports = function (context) {
 
                 return emitTable;
             }
+        }, {
+            key: 'get_processConfig',
+            value: function get_processConfig() {
+
+                return Script.get_processConfig().setRunType(Script.ProcessConfig.RUN_DAEMON);
+            }
         }]);
 
         return SayHello;

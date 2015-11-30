@@ -13,7 +13,7 @@ var _commonBucketApi = require('../common/bucketApi');
 
 var bucketApi = _interopRequireWildcard(_commonBucketApi);
 
-var Connect = require('../common/connect');
+var Connect = require('../tools/connect');
 var config = require('../datas/config');
 var output = require('../datas/outputConfig');
 

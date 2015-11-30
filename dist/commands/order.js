@@ -47,9 +47,11 @@ var _commonEntitysExchildProcess = require('../common/entitys/exchildProcess');
 
 var _commonEntitysExchildProcess2 = _interopRequireDefault(_commonEntitysExchildProcess);
 
-var _child_process = require('child_process');
-
-var _child_process2 = _interopRequireDefault(_child_process);
+var _exec = [];
+_exec[_commonEntitysProcessConfig2['default'].SERE] = require('../common/exec/SERE');
+_exec[_commonEntitysProcessConfig2['default'].SORO] = require('../common/exec/SORO');
+_exec[_commonEntitysProcessConfig2['default'].SERO] = require('../common/exec/SERO');
+_exec[_commonEntitysProcessConfig2['default'].SORE] = require('../common/exec/SORE');
 
 function splitChunk(chunk) {
 
@@ -89,47 +91,35 @@ var Order = (function (_CommandExec) {
 
             if (execScriptName && execScript.length > 0) {
                 if (execScript.length > 1) {
-                    output.scriptSameWarn(execScriptName);
-                } else {
+                    return output.scriptSameWarn(execScriptName);
+                }
 
-                    var funcCommand = splitChunk(command.nativeContent);
-                    var funcStr = execScript[0].emitTable.commandEmitTable[funcCommand.main];
-                    var processConfig = execScript[0].script.get_processConfig();
+                var funcCommand = splitChunk(command.nativeContent);
+                var funcStr = execScript[0].emitTable.commandEmitTable[funcCommand.main];
+                var processConfig = execScript[0].script.get_processConfig();
 
-                    if (funcStr) {
+                if (funcStr) {
 
-                        var exChildProcess = new _commonEntitysExchildProcess2['default']();
-                        var processInfo = new _commonEntitysProcessInfo2['default']();
-                        exChildProcess.setFuncStr(funcStr);
-                        exChildProcess.setScriptName(execScriptName);
-                        exChildProcess.setOption(funcCommand.options);
+                    var exChildProcess = new _commonEntitysExchildProcess2['default']();
+                    var processInfo = new _commonEntitysProcessInfo2['default']();
+                    processInfo.setProcessConfig(processConfig);
+                    exChildProcess.setFuncStr(funcStr);
+                    exChildProcess.setScriptName(execScriptName);
+                    exChildProcess.setOption(funcCommand.options);
 
-                        if (processConfig.runType == _commonEntitysProcessConfig2['default'].RUN_DAEMON) {
+                    var SERVICE_RECEIVE_STR = processConfig.serviceType + '' + processConfig.receiveType;
 
-                            var p = _child_process2['default'].fork(__dirname + '/../common/processDaemon.js');
-                            processInfo.setPid(p.pid);
-                            var selfpid = bucketApi.addProcess(processInfo);
-                            exChildProcess.setPid(selfpid);
-
-                            p.send({
-                                exChildProcess: exChildProcess,
-                                processInfo: processInfo
-                            });
-                        } else if (processConfig.runType == _commonEntitysProcessConfig2['default'].RUN_FAST) {
-
-                            var selfpid = bucketApi.addProcess(processInfo);
-                            exChildProcess.setPid(selfpid);
-
-                            var processFast = require('../common/processFast');
-                            processFast({
-                                exChildProcess: exChildProcess,
-                                processInfo: processInfo
-                            });
-                        }
+                    if (_exec[SERVICE_RECEIVE_STR]) {
+                        return _exec[SERVICE_RECEIVE_STR]({
+                            processConfig: processConfig,
+                            exChildProcess: exChildProcess,
+                            processInfo: processInfo
+                        });
                     } else {
-                        output.funcStrNotFound(funcCommand.main);
+                        return output.processConfigError();
                     }
                 }
+                output.funcStrNotFound(funcCommand.main);
             } else {
                 output.scriptNotFound(execScriptName);
             }

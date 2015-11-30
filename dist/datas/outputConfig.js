@@ -32,5 +32,24 @@ module.exports = {
     },
     sayOutput: function sayOutput(tip) {
         return console.log(clc.bold.cyan(tip));
+    },
+    log: (function (_log) {
+        function log(_x, _x2) {
+            return _log.apply(this, arguments);
+        }
+
+        log.toString = function () {
+            return _log.toString();
+        };
+
+        return log;
+    })(function (color, text) {
+        return console.log(clc.bold[color](log));
+    }),
+    processConfigError: function processConfigError(text) {
+        return console.log(clc.bold.red('processConfig Error: ' + (text || '')));
+    },
+    processConfigTypeError: function processConfigTypeError() {
+        return console.log(clc.bold.red('启动方式错误!'));
     }
 };

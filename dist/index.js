@@ -7,7 +7,7 @@
 'use strict';
 
 var net = require('net');
-var Connect = require('./common/connect');
+var Connect = require('./tools/connect');
 var output = require('./datas/outputConfig');
 
 var appMiddlewares = ['createServer', 'datainit', 'scriptinit'].map(function (m) {
