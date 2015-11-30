@@ -12,7 +12,12 @@ import Command from '../common/entitys/command';
 import ProcessConfig from '../common/entitys/processConfig';
 import ProcessInfo from '../common/entitys/processInfo';
 import ExChildProcess from '../common/entitys/exchildProcess';
-import child_process from 'child_process';
+
+let exec = [];
+exec[ProcessConfig.SERE] = require('../common/exec/SERE');
+exec[ProcessConfig.SORO] = require('../common/exec/SORO');
+exec[ProcessConfig.SERO] = require('../common/exec/SERO');
+exec[ProcessConfig.SORE] = require('../common/exec/SORE');
 
 function splitChunk(chunk) {
 
@@ -48,48 +53,35 @@ class Order extends CommandExec {
 
         if (execScriptName && execScript.length > 0) {
             if (execScript.length > 1) {
-                output.scriptSameWarn(execScriptName);
-            } else {
+                return output.scriptSameWarn(execScriptName);
+            }
 
-                let funcCommand = splitChunk(command.nativeContent);
-                let funcStr = execScript[0].emitTable.commandEmitTable[funcCommand.main];
-                let processConfig = execScript[0].script.get_processConfig();
+            let funcCommand = splitChunk(command.nativeContent);
+            let funcStr = execScript[0].emitTable.commandEmitTable[funcCommand.main];
+            let processConfig = execScript[0].script.get_processConfig();
 
-                if (funcStr) {
+            if (funcStr) {
 
-                    let exChildProcess = new ExChildProcess();
-                    let processInfo = new ProcessInfo();
-                    exChildProcess.setFuncStr(funcStr);
-                    exChildProcess.setScriptName(execScriptName);
-                    exChildProcess.setOption(funcCommand.options);
+                let exChildProcess = new ExChildProcess();
+                let processInfo = new ProcessInfo();
+                processInfo.setProcessConfig(processConfig);
+                exChildProcess.setFuncStr(funcStr);
+                exChildProcess.setScriptName(execScriptName);
+                exChildProcess.setOption(funcCommand.options);
 
-                    if (processConfig.runType == ProcessConfig.RUN_DAEMON) {
+                let SERVICE_RECEIVE_STR = processConfig.serviceType + '' + processConfig.receiveType;
 
-                        let p = child_process.fork(__dirname + '/../common/processDaemon.js');
-                        processInfo.setPid(p.pid);
-                        let selfpid = bucketApi.addProcess(processInfo);
-                        exChildProcess.setPid(selfpid);
-
-                        p.send({
-                            exChildProcess,
-                            processInfo
-                        });
-                    } else if (processConfig.runType == ProcessConfig.RUN_FAST) {
-
-                        let selfpid = bucketApi.addProcess(processInfo);
-                        exChildProcess.setPid(selfpid);
-
-                        const processFast = require('../common/processFast');
-                        processFast({
-                            exChildProcess,
-                            processInfo
-                        });
-                    }
-
+                if (exec[SERVICE_RECEIVE_STR]) {
+                    return exec[SERVICE_RECEIVE_STR]({
+                        processConfig,
+                        exChildProcess,
+                        processInfo
+                    });
                 } else {
-                    output.funcStrNotFound(funcCommand.main);
+                    return output.processConfigError();
                 }
             }
+            output.funcStrNotFound(funcCommand.main);
         } else {
             output.scriptNotFound(execScriptName);
         }
