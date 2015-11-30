@@ -9,13 +9,14 @@ import fs from 'fs';
 import Script from '../common/script';
 import ScriptInfo from '../common/entitys/scriptInfo';
 import * as bucketApi from '../common/bucketApi';
+import Api from '../common/api';
 
 module.exports = (next) => {
 
     let scripts = fs.readdirSync(__dirname + '/../scripts');
     let scriptModules = scripts.map((path, index)=> {
 
-        let script = require(`../scripts/${path}`)({Script});
+        let script = require(`../scripts/${path}`)({Script, Api});
 
         let scriptInfo = new ScriptInfo(index, path, script);
         scriptInfo.setDescription(script.get_description());
