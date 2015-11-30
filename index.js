@@ -7,7 +7,7 @@
 'use strict';
 
 const net = require('net');
-const Connect = require('./common/connect');
+const Connect = require('./tools/connect');
 const output = require('./datas/outputConfig');
 
 let appMiddlewares = ['createServer', 'datainit', 'scriptinit'].map(m=> {
